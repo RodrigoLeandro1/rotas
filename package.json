@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}

@@ -1,0 +1,516 @@
+/* --- 1. VARIÁVEIS GLOBAIS E ESTRUTURA --- */
+:root {
+    /* Paleta de Cores */
+    --color-primary-start: #667eea;
+    --color-primary-end: #764ba2;
+    --color-success-start: #10b981;
+    --color-success-end: #059669;
+    --color-danger-start: #ff6b6b;
+    --color-danger-end: #ee5a52;
+    --color-text-primary: #2d3748;
+    --color-text-secondary: #a0aec0;
+    --color-white-t-95: rgba(255, 255, 255, 0.95);
+    --color-white-t-90: rgba(255, 255, 255, 0.90);
+    --color-white-t-20: rgba(255, 255, 255, 0.2);
+    --color-disabled-start: #9ca3af;
+    --color-disabled-end: #6b7280;
+
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+    --gradient-success: linear-gradient(135deg, var(--color-success-start), var(--color-success-end));
+    --gradient-danger: linear-gradient(135deg, var(--color-danger-start), var(--color-danger-end));
+    --gradient-disabled: linear-gradient(135deg, var(--color-disabled-start), var(--color-disabled-end));
+    --gradient-shine: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+
+    /* Fontes */
+    --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 16px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Sombras */
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 12px 35px rgba(0, 0, 0, 0.15);
+
+    /* Bordas e Raios */
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-color: rgba(102, 126, 234, 0.1);
+
+    /* Transições */
+    --transition-fast: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-sans);
+    height: 100%;
+    background: var(--gradient-primary);
+    color: var(--color-text-primary);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- 2. PAINEL LATERAL (SIDEBAR) --- */
+.sidebar {
+    width: 420px;
+    flex-shrink: 0;
+    padding: 30px 25px;
+    background: var(--color-white-t-95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--color-white-t-20);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+/* Títulos da Sidebar */
+.sidebar h1, .sidebar h2 {
+    position: relative;
+    margin: 0;
+}
+
+.sidebar h1 {
+    font-size: 28px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 30px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+}
+
+.sidebar h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    font-weight: var(--font-weight-semibold);
+    padding-bottom: 10px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+.sidebar h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 1px;
+}
+
+/* Grupo de Input */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    background: rgba(255, 255, 255, 0.8);
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.input-group input::placeholder {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-normal);
+}
+
+.input-group input:focus-visible {
+    outline: none;
+    border-color: var(--color-primary-start);
+    background: var(--color-white-t-95);
+    box-shadow: 0 0 0 3px var(--border-color), var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* --- 3. LISTAS E BOTÕES --- */
+.stop-actions {
+    display: flex;
+    align-items: center; /* Centraliza os botões verticalmente entre si */
+    flex-wrap: nowrap;   /* Garante que os botões NUNCA quebrem a linha */
+    gap: 8px;
+}
+#stop-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#stop-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: var(--color-white-t-90);
+    border: 1px solid var(--color-white-t-20);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 12px;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+#stop-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-white-t-95);
+}
+
+#stop-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+}
+
+#stop-list li:hover::before {
+    width: 6px;
+}
+
+/* Botão de Deletar */
+.delete-btn {
+    background: var(--gradient-danger);
+    border: none;
+    color: white;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.delete-btn:active {
+    transform: translateY(0);
+}
+
+
+/* --- 4. GRUPO DE BOTÕES DE AÇÃO --- */
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaçamento entre os botões */
+    margin-top: auto; /* Empurra o grupo para o final do container */
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Botão Primário (Otimizar) */
+.primary-btn {
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    background: var(--gradient-success);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+}
+
+.primary-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-shine);
+    transition: left 0.6s;
+}
+
+.primary-btn:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.primary-btn:disabled {
+    background: var(--gradient-disabled);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 4px 15px rgba(156, 163, 175, 0.2);
+}
+
+/* Botão Secundário (Visualizar Simples) */
+.secondary-btn {
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    background-color: transparent;
+    color: var(--color-primary-start);
+    border: 2px solid var(--color-primary-start);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background-color: var(--color-primary-start);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.secondary-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+/* Botão Secundário (Visualizar Simples) */
+.secondary-btn {
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    background-color: transparent;
+    color: var(--color-primary-start);
+    border: 2px solid var(--color-primary-start);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background-color: var(--color-primary-start);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.secondary-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+/* NOVO VISUAL DESABILITADO */
+.secondary-btn:disabled {
+    background: var(--gradient-disabled);
+    color: white;
+    border: none;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 6px 20px rgba(107, 114, 128, 0.3);
+    opacity: 1;
+}
+
+
+/* --- 5. MAPA E PAINEL DE ROTA --- */
+#map {
+    flex-grow: 1;
+    height: 100vh;
+}
+
+#route-panel {
+    padding: 20px 0;
+}
+
+/* --- 6. SCROLLBAR E ANIMAÇÕES --- */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a6fd8, #6a4190);
+}
+
+/* Animação de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sidebar > *:not(.button-group) {
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.button-group {
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-delay: 0.5s; /* Anima os botões por último */
+}
+
+/* Delay escalonado */
+.sidebar > *:nth-child(1) { animation-delay: 0.1s; }
+.sidebar > *:nth-child(2) { animation-delay: 0.2s; }
+.sidebar > *:nth-child(3) { animation-delay: 0.3s; }
+.sidebar > *:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* --- 7. RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 60vh;
+        border-right: none;
+        border-bottom: 1px solid var(--color-white-t-20);
+    }
+    
+    #map {
+        height: 40vh;
+        min-height: 300px;
+    }
+}
+.info-message {
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-danger-end);
+  background: var(--color-white-t-90);
+  border: 1px solid var(--color-white-t-20);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+  animation: fadeInUp 0.3s ease-out;
+}
+/* --- 7. RESPONSIVIDADE --- */
+
+/* Estilos para tablets e telas menores */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 50vh; /* Reduz a altura máxima para dar mais espaço ao mapa */
+        border-right: none;
+        border-bottom: 1px solid var(--color-white-t-20);
+        overflow-y: auto;
+    }
+
+    #map {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .stop-list-item button {
+        opacity: 1; /* Garante que o botão de remover esteja sempre visível */
+    }
+}
+
+/* Estilos específicos para smartphones */
+@media (max-width: 600px) {
+    body {
+        font-size: 16px; /* Aumenta o tamanho da fonte base para melhor legibilidade */
+    }
+
+    .sidebar {
+        max-height: 45vh; /* Ajuste fino da altura para telas bem pequenas */
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Ajusta o tamanho do título principal */
+    }
+
+    h2 {
+        font-size: 1.3rem; /* Ajusta o tamanho dos subtítulos */
+    }
+
+    #address-input {
+        padding: 16px; /* Torna o campo de input mais fácil de tocar */
+        font-size: 1rem;
+    }
+
+    .button-group button {
+        padding: 16px; /* Aumenta a área de toque dos botões */
+        font-size: 1rem;
+        width: 100%; /* Faz os botões ocuparem a largura total */
+        margin-bottom: 10px; /* Adiciona espaço entre os botões */
+    }
+
+    .button-group button:last-child {
+        margin-bottom: 0;
+    }
+
+    #route-panel {
+        font-size: 0.95rem; /* Ajusta o tamanho da fonte no painel de rotas */
+    }
+}

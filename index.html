@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planejador de Rotas Otimizado</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header>
+                <h1>Planejador de Rotas</h1>
+            </header>
+
+            <section class="input-group">
+                <input type="text" id="address-input" placeholder="Digite um endereço de parada" aria-label="Endereço de parada" />
+            </section>
+
+            <section>
+                <h2>Paradas</h2>
+                <ul id="stop-list"></ul>
+            </section>
+
+            <div class="button-group">
+                <button class="primary-btn" id="optimize-btn" disabled>Otimizar Rota</button>
+                <p id="min-stops-msg" class="info-message" style="display: none;"></p>
+                <button class="secondary-btn" id="view-simple-route-btn" disabled>Visualizar Rota Simples</button>
+            </div>
+
+            <section id="route-panel"></section>
+        </aside>
+
+        <main id="map" role="region" aria-label="Mapa"></main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB050LAq9Hr9mAPb20jzTyDrFK3bseruqw&libraries=places,geometry&callback=initMap"></script>
+</body>
+</html>
