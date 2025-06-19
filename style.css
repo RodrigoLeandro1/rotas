@@ -98,7 +98,19 @@ body {
     color: transparent;
     text-align: center;
 }
-
+/* Estilo da Assinatura */
+.signature {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary); /* Usa a cor de texto secundária para ser discreto */
+    background-color: rgba(237, 242, 247, 0.7); /* Fundo semi-transparente */
+    padding: 4px 8px;
+    border-radius: 6px;
+    z-index: 20; /* Garante que fique acima de outros elementos da sidebar */
+}
 .sidebar h1::after {
     content: '';
     position: absolute;
