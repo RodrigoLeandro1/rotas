@@ -3,7 +3,7 @@ const CONFIG = {
     MAP_CENTER: { lat: -23.55052, lng: -46.633308 },
     MAP_ZOOM: 12,
     COUNTRY_RESTRICTION: "br",
-    API_ENDPOINT: 'http://localhost:3000/api/optimize-route',
+    API_ENDPOINT: 'https://rotas-five.onrender.com/api/optimize-route',
     COLORS: {
         PRIMARY: '#667eea',
         SUCCESS: '#10b981',
